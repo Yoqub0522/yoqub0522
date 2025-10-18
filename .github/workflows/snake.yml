@@ -1,27 +1,24 @@
 name: Generate Snake Game
 
 on:
-  schedule: # Har kuni avtomatik yangilansin (00:00 UTC)
-    - cron: "0 0 * * *"
-  workflow_dispatch: # Qo'lda ishga tushirish uchun
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "0 0 * * *"  # har kuni yarim tunda
+  workflow_dispatch:
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Generate the snake game from GitHub contribution grid
+      - name: Generate snake
         uses: Platane/snk@v3
         with:
           github_user_name: Yoqub0522
           outputs: dist/snake.svg
 
-      - name: Push generated snake to the output branch
+      - name: Push snake animation to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: output
